@@ -29,26 +29,28 @@ public class NamedEntityController {
         this.namedEntityService = namedEntityService;
     }
 
-    //OK
     @GetMapping
     public ResponseEntity<List<NamedEntity>> findAll(){
-        List<NamedEntity> results = namedEntityService.findAll();
-        return ResponseEntity.ok(results);
+        return ResponseEntity.ok(namedEntityService.findAll());
     }
 
-
-    //OK
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findOne(@PathVariable(value = "id") Long id){
-            Optional<NamedEntity> result = namedEntityService.findOne(id);
-            return ResponseEntity.ok(result);
+            return ResponseEntity.ok(namedEntityService.findOne(id));
     }
 
-
-    //OK
     @PostMapping(headers="Accept=application/json")
     public ResponseEntity create(@RequestBody NamedEntity newEntity) {
-        namedEntityService.create(newEntity);
-        return ResponseEntity.ok(newEntity);
+        return ResponseEntity.ok(namedEntityService.create(newEntity));
+    }
+
+    @PutMapping(headers="Accept=application/json")
+    public ResponseEntity update(@RequestBody NamedEntity updatedEntity){
+        return ResponseEntity.ok(namedEntityService.update(updatedEntity));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity delete(@PathVariable(value = "id") Long id){
+        return ResponseEntity.ok(namedEntityService.delete(id));
     }
 }

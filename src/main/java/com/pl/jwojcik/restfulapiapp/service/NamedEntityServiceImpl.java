@@ -34,17 +34,25 @@ public class NamedEntityServiceImpl implements NamedEntityService{
     }
 
     @Override
-    public void create(NamedEntity newNamedEntity) {
-        namedEntityRepository.save(newNamedEntity);
+    public NamedEntity create(NamedEntity newNamedEntity) {
+        return namedEntityRepository.save(newNamedEntity);
     }
 
     @Override
-    public void update(NamedEntity updatedNamedEntity) {
-        namedEntityRepository.save(updatedNamedEntity);
+    public NamedEntity update(NamedEntity updatedNamedEntity) {
+        if(namedEntityRepository.existsById(updatedNamedEntity.getId())){
+            namedEntityRepository.save(updatedNamedEntity);
+            return updatedNamedEntity;
+        }
+        return null;
     }
 
     @Override
-    public void delete(Long id) {
-        namedEntityRepository.deleteById(id);
+    public boolean delete(Long id) {
+        if(namedEntityRepository.existsById(id)){
+            namedEntityRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

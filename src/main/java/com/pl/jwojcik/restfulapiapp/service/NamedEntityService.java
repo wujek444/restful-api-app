@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface NamedEntityService {
     List<NamedEntity> findAll();
     Optional<NamedEntity> findOne(Long id);
-    void create(NamedEntity newNamedEntity);
-    void update(NamedEntity updatedNamedEntity);
-    void delete(Long id);
+    NamedEntity create(NamedEntity newNamedEntity);
+    NamedEntity update(NamedEntity updatedNamedEntity);
+    boolean delete(Long id);
 }
