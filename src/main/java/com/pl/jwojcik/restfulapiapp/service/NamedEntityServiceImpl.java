@@ -40,7 +40,7 @@ public class NamedEntityServiceImpl implements NamedEntityService{
 
     @Override
     public NamedEntity update(NamedEntity updatedNamedEntity) {
-        if(namedEntityRepository.existsById(updatedNamedEntity.getId())){
+        if(exists(updatedNamedEntity.getId())){
             namedEntityRepository.save(updatedNamedEntity);
             return updatedNamedEntity;
         }
@@ -49,10 +49,14 @@ public class NamedEntityServiceImpl implements NamedEntityService{
 
     @Override
     public boolean delete(Long id) {
-        if(namedEntityRepository.existsById(id)){
+        if(exists(id)){
             namedEntityRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    private boolean exists(Long id){
+        return namedEntityRepository.existsById(id);
     }
 }
